@@ -1,9 +1,8 @@
 package Entry;
 import java.util.Scanner;
 import Global.Commends;
-import Utils.Login;
-import Utils.Register;
-import Utils.Scan;
+import Utils.*;
+
 public class Test {
 
     private boolean loop=true;
@@ -36,9 +35,7 @@ public class Test {
                         loop=false;
                         break;
                     case Commends.REGISTER:
-                        if(!Register.register(inputArray)){
-                            continue;
-                        }
+                        Register.register(inputArray);
                         break;
                     case Commends.LOGIN:
                         if(!Login.login(inputArray)){
@@ -46,8 +43,10 @@ public class Test {
                         }
                         break;
                     case Commends.LOGOUT:
+                        Logout.logout(inputArray);
                         break;
                     case Commends.PRINTINFO:
+                        Print.printInfo(inputArray);
                         break;
                     case Commends.CREATECOURSE:
                         break;

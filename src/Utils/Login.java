@@ -1,5 +1,6 @@
 package Utils;
 
+import Global.Status;
 import Utils.Judge.JudgeType;
 import Global.UserList;
 
@@ -36,8 +37,9 @@ public class Login {
         }
 
         //登录成功
-
+        //添加到登录列表
         UserList.loginList.put(Id,UserList.userList.get(Id));
+        Status.currentUserId=Id;
         System.out.println("Welcome to ACP, "+Id);
 
         return true;

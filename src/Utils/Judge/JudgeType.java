@@ -12,7 +12,7 @@ public class JudgeType {
     }
     //判断学工号是否合法
     public static boolean isLegalId(String id){
-        String regex = "^(1[9-9]|2[0-4])[0-3][0-9][1-6][0-9]{3}$|^(SY|ZY)(2[1-4])[0-3][0-9][1-6][0-9]{2}$|^BY(1[9]|2[0-4])[0-3][0-9][1-6][0-9]{2}$|^[0-9]{5}$|^AD[0-9]{3}$\n";
+        String regex = "^(1[9-9]|2[0-4])[0-3][0-9][1-6][0-9]{3}$|^(SY|ZY)(2[1-4])[0-3][0-9][1-6][0-9]{2}$|^BY(1[9]|2[0-4])[0-3][0-9][1-6][0-9]{2}$|^[0-9]{5}$|AD(0[0-9]{2}|1[0-9]{2}|2[0-9]{2}|3[0-9]{2}|4[0-9]{2}|5[0-9]{2}|6[0-9]{2}|7[0-9]{2}|8[0-9]{2}|9[0-9]{2}|9[0-8]{2}|999)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(id);
         return matcher.matches();
@@ -49,7 +49,7 @@ public class JudgeType {
 
     //是否是管理员
     public static boolean isAdministrator(String id){
-        String regexAdministrator = "^AD(\\\\d{3})$";
+        String regexAdministrator = "AD(0[0-9]{2}|1[0-9]{2}|2[0-9]{2}|3[0-9]{2}|4[0-9]{2}|5[0-9]{2}|6[0-9]{2}|7[0-9]{2}|8[0-9]{2}|9[0-9]{2}|9[0-8]{2}|999)";
         Pattern pattern = Pattern.compile(regexAdministrator);
         Matcher matcher = pattern.matcher(id);
         return matcher.matches();

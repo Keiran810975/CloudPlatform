@@ -54,4 +54,13 @@ public class User {
     public void setType(String type) {
         this.type = type;
     }
+
+    //toString
+    @Override
+    public String toString() {
+        return "User id: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Type: " + type + "\n" +
+                "Print information success";
+    }
 }
