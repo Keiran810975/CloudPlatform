@@ -1,5 +1,7 @@
 package Models;
 
+import Global.CourseId;
+
 import java.util.*;
 
 public class Teacher extends User{
@@ -18,6 +20,8 @@ public class Teacher extends User{
 
         // 打印课程信息：课程号、课程名称、课程时间、学分、学时
         for (Course course : courseArray) {
+            String id=course.getCourseId();
+            if(CourseId.courseStatus.containsKey(id))
             System.out.println("Course ID: " + course.getCourseId() +
                     ", Course Name: " + course.getCourseName() +
                     ", Time: " + course.getCourseTime() +

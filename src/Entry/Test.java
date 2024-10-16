@@ -49,12 +49,16 @@ public class Test {
                         Print.printInfo(inputArray);
                         break;
                     case Commends.CREATECOURSE:
+                        CreateCourse.createCourse(inputArray);
                         break;
                     case Commends.LISTCOURSE:
+                        CheckCourse.checkCourse(inputArray);
                         break;
                     case Commends.SELECTCOURSE:
+                        chooseCourse.chooseCourse(inputArray);
                         break;
                     case Commends.CANCELCOURSE:
+                        cancelCourse.cancelCourse(inputArray);
                         break;
                     default:
                         break;

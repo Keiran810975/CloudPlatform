@@ -61,7 +61,7 @@ public class chooseCourse {
             stu.getTimeTable()[x][i]=1;
         }
         stu.getCourses().put(courseId,cc);
-        System.out.println("Select course success (courseId: C-X)");
+        System.out.println("Select course success (courseId: "+courseId+")");
         
 
         return true;
