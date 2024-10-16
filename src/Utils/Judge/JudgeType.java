@@ -38,6 +38,10 @@ public class JudgeType {
         Matcher matcher = pattern.matcher(id);
         return matcher.matches();
     }
+    //是否是学生
+    public static boolean isStudent(String id){
+        return isStudentUnder(id)||isStudentPost(id)||isStudentDoc(id);
+    }
 
     //是否是老师
     public static boolean isTeacher(String id){
