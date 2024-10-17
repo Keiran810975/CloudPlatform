@@ -22,11 +22,11 @@ public class Teacher extends User{
         for (Course course : courseArray) {
             String id=course.getCourseId();
             if(CourseId.courseStatus.containsKey(id))
-            System.out.println("Course ID: " + course.getCourseId() +
-                    ", Course Name: " + course.getCourseName() +
-                    ", Time: " + course.getCourseTime() +
-                    ", Credit: " + course.getCourseCredit() +
-                    ", Period: " + course.getCoursePeriod());
+            System.out.println(course.getCourseId() +
+                    " " + course.getCourseName() +
+                    " " + course.getCourseTime() +
+                    " " + course.getCourseCredit() +
+                    " " + course.getCoursePeriod());
         }
     }
 

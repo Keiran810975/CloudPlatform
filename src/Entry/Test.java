@@ -17,7 +17,7 @@ public class Test {
 
     private void mainMenu(){
         while(loop){
-            System.out.println("请输入指令：");
+            //System.out.println("请输入指令：");
             String input = scanner.nextLine();
             String[] inputArray = Scan.splitInput(input);
             key = inputArray[0];

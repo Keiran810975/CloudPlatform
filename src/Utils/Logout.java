@@ -4,7 +4,7 @@ import Global.Status;
 import Utils.Judge.JudgeType;
 public class Logout {
     public static boolean logout(String[] arr){
-        if(!(Scan.isParamNum(arr,2))||(Scan.isParamNum(arr,1))){
+        if(!((Scan.isParamNum(arr,2))||(Scan.isParamNum(arr,1)))){
             System.out.println("Illegal argument count");
             return false;
         }
@@ -16,13 +16,14 @@ public class Logout {
             }
             String Id=Status.currentUserId;
             System.out.println(Id+" Bye~");
+            UserList.loginList.remove(Id);
             Status.currentUserId=null;
             return true;
         }
         if(Scan.isParamNum(arr,2)){
             String Id= arr[1];
             //如果不是管理员身份
-            if(!JudgeType.isAdministrator(Id)){
+            if(!JudgeType.isAdministrator(Status.currentUserId)){
                 System.out.println("Permission denied");
                 return false;
             }
@@ -42,6 +43,7 @@ public class Logout {
                 return false;
             }
             System.out.println(Id+" Bye~");
+            UserList.loginList.remove(Id);
             Status.currentUserId=null;
             return true;
         }

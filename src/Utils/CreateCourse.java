@@ -59,9 +59,10 @@ public class CreateCourse {
         }
         //课程时间冲突
         for(int i=y;i<=z;i++){
-            if(teacher.getTimeTable()[x][i]==1)
+            if(teacher.getTimeTable()[x][i]==1){
                 System.out.println("Course time conflicts");
                 return false;
+            }
         }
 
         //学分不合法
@@ -84,7 +85,6 @@ public class CreateCourse {
         for(int i=y;i<=z;i++){
             teacher.getTimeTable()[x][i]=1;
         }
-        teacher.getCourseArray().add(newCourse);
         CourseId.courseList.add(newCourse);
         CourseId.courseStatus.put(Cid,newCourse);
         System.out.println("Create course success (courseId: "+Cid+")");

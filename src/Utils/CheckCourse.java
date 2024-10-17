@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class CheckCourse {
     public static boolean checkCourse(String[] arr){
-        if(!(Scan.isParamNum(arr,2))||(Scan.isParamNum(arr,1))){
+        if(!((Scan.isParamNum(arr,2))||(Scan.isParamNum(arr,1)))){
             System.out.println("Illegal argument count");
             return false;
         }
@@ -31,6 +31,8 @@ public class CheckCourse {
                 }
                 //打印所有课程信息
                 CourseId.printCourses();
+                System.out.println("List course success");
+                return true;
             }
             //如果是老师
             else if(JudgeType.isTeacher(userId)){
@@ -42,6 +44,8 @@ public class CheckCourse {
                 }
                 //打印老师所教授的课程信息
                 teacher.printCourseArray();
+                System.out.println("List course success");
+                return true;
             }
         }
         //有可选参数
@@ -76,6 +80,8 @@ public class CheckCourse {
             }
             //打印老师所教授的课程信息
             teacher.printCourseArray();
+            System.out.println("List course success");
+            return  true;
         }
 
         return true;

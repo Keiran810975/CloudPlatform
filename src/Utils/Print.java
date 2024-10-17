@@ -22,7 +22,7 @@ public class Print {
         //有参数
         if(Scan.isParamNum(arr,2)){
             String id=arr[1];
-            if(!JudgeType.isAdministrator(id)){
+            if(!JudgeType.isAdministrator(Status.currentUserId)){
                 System.out.println("Permission denied");
                 return false;
             }

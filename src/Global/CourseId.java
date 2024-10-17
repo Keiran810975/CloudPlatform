@@ -30,12 +30,12 @@ public class CourseId {
 
         // 输出按顺序排列的课程信息
         for (Course course : courseList) {
-            System.out.println("Teacher: " + course.getCourseTeacher() +
-                    ", Course ID: " + course.getCourseId() +
-                    ", Course Name: " + course.getCourseName()+
-                    ", Time: " + course.getCourseTime() +
-                    ", Credit: " + course.getCourseCredit() +
-                    ", Period: " + course.getCoursePeriod());
+            System.out.println(course.getCourseTeacher() +
+                    " " + course.getCourseId() +
+                    " " + course.getCourseName()+
+                    " " + course.getCourseTime() +
+                    " " + course.getCourseCredit() +
+                    " " + course.getCoursePeriod());
         }
     }
 }

@@ -45,7 +45,7 @@ public class JudgeType {
 
     //是否是老师
     public static boolean isTeacher(String id){
-        String regexTeacher = "^(\\\\d{5})$";
+        String regexTeacher = "^\\d{5}$";
         Pattern pattern = Pattern.compile(regexTeacher);
         Matcher matcher = pattern.matcher(id);
         return matcher.matches();
@@ -53,7 +53,7 @@ public class JudgeType {
 
     //是否是管理员
     public static boolean isAdministrator(String id){
-        String regexAdministrator = "AD(0[0-9]{2}|1[0-9]{2}|2[0-9]{2}|3[0-9]{2}|4[0-9]{2}|5[0-9]{2}|6[0-9]{2}|7[0-9]{2}|8[0-9]{2}|9[0-9]{2}|9[0-8]{2}|999)";
+        String regexAdministrator = "^AD\\d{3}$";
         Pattern pattern = Pattern.compile(regexAdministrator);
         Matcher matcher = pattern.matcher(id);
         return matcher.matches();

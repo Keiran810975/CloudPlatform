@@ -20,18 +20,36 @@ public class JudgeCourse {
     }
     //是否是合法时间
     public static boolean isTime(String courseTime){
-        String regex = "^[0-7]_[1-9]|1[0-4]-[1-9]|1[0-4]$|^[0-7]_[1-9]|1[0-4]-[1-9]|1[0-4]$";
+        String regex = "^[1-7]_(1[0-4]|[1-9])-(1[0-4]|[1-9])$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(courseTime);
-        return matcher.matches();
+
+        // 检查是否符合基本格式
+        if (matcher.matches()) {
+            // 提取星期和时间
+            String[] parts = courseTime.split("_");
+            int weekDay = Integer.parseInt(parts[0]); // 星期
+            String[] times = parts[1].split("-");
+            int startTime = Integer.parseInt(times[0]); // 开始时间
+            int endTime = Integer.parseInt(times[1]);   // 结束时间
+
+            // 检查 X ≤ Y
+            return startTime <= endTime;
+        }
+
+        return false; // 格式不匹配
     }
 
     //合法学分
-    public static boolean isCredit(String courseCredit){
-        int credit=Integer.parseInt(courseCredit);
-        if(credit>0&&credit<=12)return true;
-        return false;
+    public static boolean isCredit(String courseCredit) {
+        try {
+            double credit = Double.parseDouble(courseCredit); // 使用 Double 解析
+            return credit > 0 && credit <= 12; // 检查学分是否在有效范围内
+        } catch (NumberFormatException e) {
+            return false; // 如果无法解析，返回 false
+        }
     }
+
 
     //合法学时
     public static boolean isPeriod(String coursePeriod){
