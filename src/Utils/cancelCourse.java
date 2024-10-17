@@ -51,6 +51,7 @@ public class cancelCourse {
                 }
                 //学生注销成功
                 stu.getCourses().remove(courseId);
+                System.out.println("Cancel course success (courseId: "+courseId+")");
             }else{
                 Teacher tea=(Teacher)user;
                 if(!tea.getCourses().containsKey(courseId)){
@@ -60,6 +61,9 @@ public class cancelCourse {
                 //教师注销成功
                 tea.getCourses().remove(courseId);
                 tea.getCourseArray().remove(courseId);
+                CourseId.courseStatus.remove(courseId);
+                CourseId.courseList.remove(courseId);
+                System.out.println("Cancel course success (courseId: "+courseId+")");
             }
         }
 

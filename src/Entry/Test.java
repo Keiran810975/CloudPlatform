@@ -27,11 +27,7 @@ public class Test {
             }else{
                 switch (key){
                     case Commends.QUIT:
-                        if(!Scan.isParamNum(inputArray,1)){
-                            System.out.println("Illegal argument count");
-                            continue;
-                        }
-                        System.out.println("----- Good Bye! -----");
+                        Quit.quit(inputArray);
                         loop=false;
                         break;
                     case Commends.REGISTER:

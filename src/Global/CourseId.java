@@ -30,6 +30,8 @@ public class CourseId {
 
         // 输出按顺序排列的课程信息
         for (Course course : courseList) {
+            String id=course.getCourseId();
+            if(courseStatus.containsKey(id))
             System.out.println(course.getCourseTeacher() +
                     " " + course.getCourseId() +
                     " " + course.getCourseName()+

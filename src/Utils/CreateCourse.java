@@ -79,7 +79,7 @@ public class CreateCourse {
         //课程创建成功
         String Cid= CourseId.getCourseId();
         Course newCourse= new Course(Cid,courseName,time,credit,period,teacher.getName());
-        teacher.getCourses().put(courseName,newCourse);
+        teacher.getCourses().put(Cid,newCourse);
         teacher.getCourseArray().add(newCourse);
         //更新时间表
         for(int i=y;i<=z;i++){

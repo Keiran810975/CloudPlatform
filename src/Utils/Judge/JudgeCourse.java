@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class JudgeCourse {
     //是否是合法课程编号
     public static boolean isCourseId(String courseId){
-        String regex = "C-\\d+";
+        String regex = "^C-[1-9]\\d*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(courseId);
         return matcher.matches();
