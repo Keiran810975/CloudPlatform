@@ -8,12 +8,12 @@ public class Logout {
             System.out.println("Illegal argument count");
             return false;
         }
+        if(Status.currentUserId==null){
+            System.out.println("No one is online");
+            return false;
+        }
         //如果无参数
         if(Scan.isParamNum(arr,1)){
-            if(Status.currentUserId==null){
-                System.out.println("No one is online");
-                return false;
-            }
             String Id=Status.currentUserId;
             System.out.println(Id+" Bye~");
             UserList.loginList.remove(Id);
@@ -44,7 +44,9 @@ public class Logout {
             }
             System.out.println(Id+" Bye~");
             UserList.loginList.remove(Id);
-            Status.currentUserId=null;
+            if(Status.currentUserId==Id){
+                Status.currentUserId=null;
+            }
             return true;
         }
 

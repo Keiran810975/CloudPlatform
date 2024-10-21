@@ -17,7 +17,7 @@ public class CreateCourse {
         }
         //当前无用户在线
         if(Status.currentUserId == null){
-            System.out.println("No one is online ");
+            System.out.println("No one is online");
             return false;
         }
         //权限不是teacher
@@ -36,27 +36,37 @@ public class CreateCourse {
         String time=arr[2];
         String credit=arr[3];
         String period=arr[4];
-        String str=time;
-        String[] parts = str.split("_");
-        int x = Integer.parseInt(parts[0]); // 解析
-        String[] subParts = parts[1].split("-");
-        int y = Integer.parseInt(subParts[0]); // 解析y
-        int z = Integer.parseInt(subParts[1]); // 解析z
+
         //课程名称不合法
         if(!JudgeCourse.isCourse(courseName)){
             System.out.println("Illegal course name");
             return false;
         }
         //这个老师已经有了同名课程
-        if(teacher.getCourses().containsKey(courseName)){
-            System.out.println("Course name exists");
-            return false;
+        for (String courseId : teacher.getCourses().keySet()) {
+            if(!teacher.getCourses().containsKey(courseId))continue;
+            Course course = teacher.getCourses().get(courseId);
+            if(course.getCourseName().equals(courseName)){
+                System.out.println("Course name exists");
+                return false;
+            }
         }
+
+//        if(teacher.getCourses().containsKey(courseName)){
+//            System.out.println("Course name exists");
+//            return false;
+//        }
         //课程时间不合法
         if(!JudgeCourse.isTime(time)){
             System.out.println("Illegal course time");
             return false;
         }
+        String str=time;
+        String[] parts = str.split("_");
+        int x = Integer.parseInt(parts[0]); // 解析
+        String[] subParts = parts[1].split("-");
+        int y = Integer.parseInt(subParts[0]); // 解析y
+        int z = Integer.parseInt(subParts[1]); // 解析z
         //课程时间冲突
         for(int i=y;i<=z;i++){
             if(teacher.getTimeTable()[x][i]==1){
@@ -81,6 +91,7 @@ public class CreateCourse {
         Course newCourse= new Course(Cid,courseName,time,credit,period,teacher.getName());
         teacher.getCourses().put(Cid,newCourse);
         teacher.getCourseArray().add(newCourse);
+        teacher.setCourseNum(teacher.getCourseNum()+1);
         //更新时间表
         for(int i=y;i<=z;i++){
             teacher.getTimeTable()[x][i]=1;

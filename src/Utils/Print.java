@@ -9,12 +9,13 @@ public class Print {
             System.out.println("Illegal argument count");
             return false;
         }
+        if(Status.currentUserId==null){
+            System.out.println("No one is online");
+            return false;
+        }
         //无参数,打印当前用户信息
         if(Scan.isParamNum(arr,1)){
-            if(Status.currentUserId==null){
-                System.out.println("No one is online");
-                return false;
-            }
+
             User user = UserList.userList.get(Status.currentUserId);
             System.out.println(user.toString());
             return true;

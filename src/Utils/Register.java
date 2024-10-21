@@ -42,7 +42,7 @@ public class Register {
         }
         //确认密码是否和密码一致
         if(!JudgeInfo.isConfirmPassword(password,confirmPassword)){
-            System.out.println("Passwords do not match ");
+            System.out.println("Passwords do not match");
             return false;
         }
         //身份类型是否合法

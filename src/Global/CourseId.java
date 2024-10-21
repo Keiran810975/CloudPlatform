@@ -23,21 +23,34 @@ public class CourseId {
                 if (teacherCompare != 0) {
                     return teacherCompare;
                 }
-                // 如果老师姓名相同，按课程号排序
-                return c1.getCourseId().compareTo(c2.getCourseId());
+
+                // 如果老师姓名相同，按课程号中的数字部分排序
+                String courseId1 = c1.getCourseId().replaceAll("[^0-9]", ""); // 提取数字部分
+                String courseId2 = c2.getCourseId().replaceAll("[^0-9]", "");
+
+                // 如果课程号中没有数字部分，按原字符串进行比较
+                if (courseId1.isEmpty() || courseId2.isEmpty()) {
+                    return c1.getCourseId().compareTo(c2.getCourseId());
+                }
+
+                // 将字符串转换为整数并比较
+                return Integer.parseInt(courseId1) - Integer.parseInt(courseId2);
             }
         });
 
         // 输出按顺序排列的课程信息
         for (Course course : courseList) {
             String id=course.getCourseId();
-            if(courseStatus.containsKey(id))
-            System.out.println(course.getCourseTeacher() +
-                    " " + course.getCourseId() +
-                    " " + course.getCourseName()+
-                    " " + course.getCourseTime() +
-                    " " + course.getCourseCredit() +
-                    " " + course.getCoursePeriod());
+            if(courseStatus.containsKey(id)){
+                System.out.print(course.getCourseTeacher() +
+                        " " + course.getCourseId() +
+                        " " + course.getCourseName()+
+                        " " + course.getCourseTime() +
+                        " ");
+                double number = Double.parseDouble(course.getCourseCredit());
+                System.out.printf("%.1f ", number);
+                System.out.println(course.getCoursePeriod());
+            }
         }
     }
 }

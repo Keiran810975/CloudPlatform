@@ -51,8 +51,13 @@ public class JudgeCourse {
     }
 
 
+
     //合法学时
     public static boolean isPeriod(String coursePeriod){
+        String regex = "^\\d+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(coursePeriod);
+        if(!matcher.matches())return false;
         int period=Integer.parseInt(coursePeriod);
         if(period>0&&period<=1280)return true;
         return false;

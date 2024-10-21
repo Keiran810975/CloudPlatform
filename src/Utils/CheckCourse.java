@@ -71,7 +71,7 @@ public class CheckCourse {
                 System.out.println("User id does not belong to a Teacher");
                 return false;
             }
-            User user = UserList.userList.get(Status.currentUserId);
+            User user = UserList.userList.get(checkId);
             Teacher teacher = (Teacher) user;
             //工号对应的老师名下无课程
             if(teacher.getCourseArray().isEmpty()){
@@ -79,7 +79,7 @@ public class CheckCourse {
                 return false;
             }
             //打印老师所教授的课程信息
-            teacher.printCourseArray();
+            teacher.printCourseArray2();
             System.out.println("List course success");
             return  true;
         }

@@ -3,6 +3,7 @@ package Utils;
 import Global.CourseId;
 import Global.Status;
 import Global.UserList;
+import Models.Course;
 import Models.Student;
 import Models.Teacher;
 import Models.User;
@@ -34,9 +35,12 @@ public class cancelCourse {
                 return false;
             }
             //管理员课程注销成功
+//            Course c=CourseId.courseStatus.get(courseId);
+//            String t=c.getCourseTeacher();
             CourseId.courseStatus.remove(courseId);
             CourseId.courseList.remove(courseId);
             System.out.println("Cancel course success (courseId: "+courseId+")");
+            return true;
         }else{
             if(!CourseId.courseStatus.containsKey(courseId)){
                 System.out.println("Course does not exist");
@@ -50,6 +54,17 @@ public class cancelCourse {
                     return false;
                 }
                 //学生注销成功
+                Course cc=CourseId.courseStatus.get(courseId);
+                String str=cc.getCourseTime();
+                String[] parts = str.split("_");
+                int x = Integer.parseInt(parts[0]); // 解析
+                String[] subParts = parts[1].split("-");
+                int y = Integer.parseInt(subParts[0]); // 解析y
+                int z = Integer.parseInt(subParts[1]); // 解析z
+                for(int i=y;i<=z;i++){
+                    stu.getTimeTable()[x][i]=0;
+                }
+
                 stu.getCourses().remove(courseId);
                 System.out.println("Cancel course success (courseId: "+courseId+")");
             }else{
@@ -59,11 +74,23 @@ public class cancelCourse {
                     return false;
                 }
                 //教师注销成功
+                Course cc=CourseId.courseStatus.get(courseId);
+                String str=cc.getCourseTime();
+                String[] parts = str.split("_");
+                int x = Integer.parseInt(parts[0]); // 解析
+                String[] subParts = parts[1].split("-");
+                int y = Integer.parseInt(subParts[0]); // 解析y
+                int z = Integer.parseInt(subParts[1]); // 解析z
+                for(int i=y;i<=z;i++){
+                    tea.getTimeTable()[x][i]=0;
+                }
+                tea.setCourseNum(tea.getCourseNum()-1);
                 tea.getCourses().remove(courseId);
                 tea.getCourseArray().remove(courseId);
                 CourseId.courseStatus.remove(courseId);
                 CourseId.courseList.remove(courseId);
                 System.out.println("Cancel course success (courseId: "+courseId+")");
+                return true;
             }
         }
 
