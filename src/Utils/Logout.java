@@ -1,6 +1,7 @@
 package Utils;
 import Global.UserList;
 import Global.Status;
+import Models.User;
 import Utils.Judge.JudgeType;
 public class Logout {
     public static boolean logout(String[] arr){
@@ -17,6 +18,7 @@ public class Logout {
             String Id=Status.currentUserId;
             System.out.println(Id+" Bye~");
             UserList.loginList.remove(Id);
+            UserList.loginIdList.remove(Id);
             Status.currentUserId=null;
             return true;
         }
@@ -44,6 +46,7 @@ public class Logout {
             }
             System.out.println(Id+" Bye~");
             UserList.loginList.remove(Id);
+            UserList.loginIdList.remove(Id);
             if(Status.currentUserId==Id){
                 Status.currentUserId=null;
             }

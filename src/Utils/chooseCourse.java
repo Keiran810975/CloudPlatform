@@ -56,7 +56,15 @@ public class chooseCourse {
             }
         }
 
+        //已选课程人数大于等于30人
+        if(cc.getCourseMembers()>=30){
+            System.out.println("Course capacity is full");
+            return false;
+        }
         //选课成功
+        cc.setCourseMembers(cc.getCourseMembers()+1);
+        cc.getCourseStudents().put(stu.getId(),stu);
+        cc.getCourseStudentsArray().add(stu);
         for(int i=y;i<=z;i++){
             stu.getTimeTable()[x][i]=1;
         }

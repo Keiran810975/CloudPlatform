@@ -76,6 +76,7 @@ public class Register {
             User newUser = new Administrator(Id,name,password,confirmPassword,identityType);
             UserList.userList.put(Id,newUser);
         }
+        UserList.loginIdList.add(Id);
 
         return true;
     }

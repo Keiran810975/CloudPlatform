@@ -60,6 +60,25 @@ public class Test {
                     case Commends.CANCELCOURSE:
                         cancelCourse.cancelCourse(inputArray);
                         break;
+                    case Commends.SWITCH:
+                        Switch.switchUser(inputArray);
+                        break;
+                    case Commends.OUTPUTCOURSEBATCH:
+
+                        break;
+                    case Commends.INPUTCOURSEBATCH:
+
+                        break;
+                    case Commends.LISTSTUDENT:
+                        ListStudent.listStudent(inputArray);
+                        break;
+                    case Commends.REMOVESTUDENT:
+                        RemoveStudent.removeStudent(inputArray);
+                        break;
+                    case Commends.LISTCOURSESCHEDULE:
+                        ListCourseSchedule.listCourseSchedule(inputArray);
+                        break;
+
                     default:
                         break;
                 }
