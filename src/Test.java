@@ -64,10 +64,10 @@ public class Test {
                         Switch.switchUser(inputArray);
                         break;
                     case Commends.OUTPUTCOURSEBATCH:
-
+                        OutputCourseBatch.outputCourseBatch(inputArray);
                         break;
                     case Commends.INPUTCOURSEBATCH:
-
+                        InputCourseBatch.inputCourseBatch(inputArray);
                         break;
                     case Commends.LISTSTUDENT:
                         ListStudent.listStudent(inputArray);

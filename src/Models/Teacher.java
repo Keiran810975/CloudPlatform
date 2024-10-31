@@ -2,9 +2,10 @@ package Models;
 
 import Global.CourseId;
 
+import java.io.*;
 import java.util.*;
 
-public class Teacher extends User{
+public class Teacher extends User implements Serializable {
     private Map<String,Course> courses = new HashMap<>();//课程号，课程
     private List<Course> courseArray = new ArrayList<>();//课程号，课程>
     //private Set<Course> courseArray = new LinkedHashSet<>();//课程号
@@ -116,5 +117,28 @@ public class Teacher extends User{
         this.courseNum = courseNum;
     }
 
+    public void serializeCourses(String path) {
+        // 创建目标文件对象
+        File targetFile = new File(path);
+        // 获取父目录并创建
+        File parentDir = targetFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();  // 创建所有必要的父目录
+        }
 
+        // 开始序列化
+        try (FileOutputStream fileOut = new FileOutputStream(targetFile);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+
+            // 遍历courseArray并检查课程是否在courses哈希表中
+            for (Course course : courseArray) {
+                if (courses.containsKey(course.getCourseId())) {
+                    out.writeObject(course);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

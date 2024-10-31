@@ -1,7 +1,12 @@
 package Utils;
 
 import Global.Status;
+import Global.UserList;
+import Models.Teacher;
 import Utils.Judge.JudgeType;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class OutputCourseBatch {
     public static boolean outputCourseBatch(String[] arr){
@@ -20,7 +25,18 @@ public class OutputCourseBatch {
             return false;
         }
         //导出成功
+        String path= arr[1];
+        String targetPath;
 
+        // 判断路径前缀并设置目标路径
+        if (path.startsWith("./")) {
+            targetPath = "src/data/"+path.substring(2);
+        }else{
+            targetPath = "src/data/"+path;
+        }
+        Teacher t=(Teacher) UserList.userList.get(Status.currentUserId);
+        t.serializeCourses(targetPath);
+        System.out.println("Output course batch success");
         return true;
     }
 }

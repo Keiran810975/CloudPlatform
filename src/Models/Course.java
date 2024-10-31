@@ -1,8 +1,9 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Course {
+public class Course implements Serializable {
     private String courseId;//课程号
     private String courseName;
     private String courseTime;//课程时间

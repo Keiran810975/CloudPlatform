@@ -1,10 +1,11 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Student extends User {
+public class Student extends User implements Serializable {
     private Map<String,Course> courses = new HashMap<>();
     private String studentType;//本硕博:under/post/doc
     private int[][] timeTable= new int[8][15];//课程时间表
