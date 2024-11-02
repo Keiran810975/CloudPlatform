@@ -3,10 +3,13 @@ package Utils;
 import Global.CourseId;
 import Global.Status;
 import Global.UserList;
+import Models.Course;
 import Models.Student;
 import Models.Teacher;
 import Utils.Judge.JudgeCourse;
 import Utils.Judge.JudgeType;
+
+import java.util.Iterator;
 
 public class RemoveStudent {
     public static boolean removeStudent(String[] arr){
@@ -45,8 +48,8 @@ public class RemoveStudent {
         if(Scan.isParamNum(arr,2)){
             //如果是老师
             Student stu= (Student) UserList.userList.get(id);
-            Teacher t= (Teacher) UserList.userList.get(Status.currentUserId);
             if(JudgeType.isTeacher(Status.currentUserId)){
+                Teacher t= (Teacher) UserList.userList.get(Status.currentUserId);
                 //如果学生没有选自己的课
                 boolean sig=false;
                 for (String courseId : stu.getCourses().keySet()) {
@@ -60,9 +63,33 @@ public class RemoveStudent {
                     return false;
                 }
                 //移除成功(老师从自己的所有课程中移除该学生)
-                for (String courseId : stu.getCourses().keySet()){
-                    if(t.getCourses().containsKey(courseId)){
-                        stu.getCourses().remove(courseId);
+//                for (String courseId : stu.getCourses().keySet()){
+//                    if(t.getCourses().containsKey(courseId)){
+//                        stu.getCourses().remove(courseId);
+//                    }
+//                }
+                Iterator<Course> iterator1 = t.getCourses().values().iterator();
+                while(iterator1.hasNext()){
+                    Course c=iterator1.next();
+                    if(c.getCourseStudents().containsKey(id)){
+                        String str=c.getCourseTime();
+                        String[] parts = str.split("_");
+                        int x = Integer.parseInt(parts[0]); // 解析
+                        String[] subParts = parts[1].split("-");
+                        int y = Integer.parseInt(subParts[0]); // 解析y
+                        int z = Integer.parseInt(subParts[1]); // 解析z
+                        for(int i=y;i<=z;i++){
+                            stu.getTimeTable()[x][i]=0;
+                        }
+                        c.getCourseStudents().remove(id);
+                        c.setCourseMembers(c.getCourseMembers()-1);
+                    }
+                }
+                Iterator<String> iterator = stu.getCourses().keySet().iterator();
+                while (iterator.hasNext()) {
+                    String courseId = iterator.next();
+                    if (t.getCourses().containsKey(courseId)) {
+                        iterator.remove(); // 使用迭代器的 remove 方法
                     }
                 }
                 System.out.println("Remove student success");
@@ -75,6 +102,23 @@ public class RemoveStudent {
                     return false;
                 }
                 //移除成功(所有课程移除该学生)
+                Iterator<Course> iterator = CourseId.courseStatus.values().iterator();
+                while (iterator.hasNext()) {
+                    Course c = iterator.next();
+                    if(c.getCourseStudents().containsKey(id)){
+                        String str=c.getCourseTime();
+                        String[] parts = str.split("_");
+                        int x = Integer.parseInt(parts[0]); // 解析
+                        String[] subParts = parts[1].split("-");
+                        int y = Integer.parseInt(subParts[0]); // 解析y
+                        int z = Integer.parseInt(subParts[1]); // 解析z
+                        for(int i=y;i<=z;i++){
+                            stu.getTimeTable()[x][i]=0;
+                        }
+                        c.getCourseStudents().remove(id);
+                        c.setCourseMembers(c.getCourseMembers()-1);
+                    }
+                }
                 stu.getCourses().clear();
                 System.out.println("Remove student success");
                 return true;
@@ -110,7 +154,20 @@ public class RemoveStudent {
             }
 
             //移除成功
+
             stu.getCourses().remove(courseId);
+            Course c=CourseId.courseStatus.get(courseId);
+            String str=c.getCourseTime();
+            String[] parts = str.split("_");
+            int x = Integer.parseInt(parts[0]); // 解析
+            String[] subParts = parts[1].split("-");
+            int y = Integer.parseInt(subParts[0]); // 解析y
+            int z = Integer.parseInt(subParts[1]); // 解析z
+            for(int i=y;i<=z;i++){
+                stu.getTimeTable()[x][i]=0;
+            }
+            c.getCourseStudents().remove(id);
+            c.setCourseMembers(c.getCourseMembers()-1);
             System.out.println("Remove student success");
             return true;
         }

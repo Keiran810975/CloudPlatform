@@ -47,7 +47,7 @@ public class Logout {
             System.out.println(Id+" Bye~");
             UserList.loginList.remove(Id);
             UserList.loginIdList.remove(Id);
-            if(Status.currentUserId==Id){
+            if(Status.currentUserId.equals(Id)){
                 Status.currentUserId=null;
             }
             return true;

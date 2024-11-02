@@ -29,9 +29,9 @@ public class InputCourseBatch {
         String path=arr[1];
         String targetPath;
         if (path.startsWith("./")) {
-            targetPath = "src/data/"+path.substring(2);
+            targetPath = "./data/"+path.substring(2);
         }else{
-            targetPath = "src/data/"+path;
+            targetPath = "./data/"+path;
         }
         File file = new File(targetPath);
         if(!file.exists()){
@@ -58,11 +58,18 @@ public class InputCourseBatch {
                         System.out.println("Course count reaches limit");
                         break;
                     }
-                    //课程名字已存在
-                    if(CourseId.courseStatus.containsKey(cc.getCourseName())){
-                        System.out.println("Course name already exists");
-                        continue;
+                    //课程名字已存在(只和自己的课程比较)
+                    boolean sig=false;
+                    for (String courseId : t.getCourses().keySet()) {
+                        if(!t.getCourses().containsKey(courseId))continue;
+                        Course course = t.getCourses().get(courseId);
+                        if(course.getCourseName().equals(cc.getCourseName())){
+                            System.out.println("Course name already exists");
+                            sig=true;
+                            break;
+                        }
                     }
+                    if(sig)continue;
                     //课程时间冲突
                     String str=cc.getCourseTime();
                     String[] parts = str.split("_");
@@ -71,23 +78,25 @@ public class InputCourseBatch {
                     int y = Integer.parseInt(subParts[0]); // 解析y
                     int z = Integer.parseInt(subParts[1]); // 解析z
                     //课程时间冲突
-                    boolean sig=false;
+                    boolean sig2=false;
                     for(int i=y;i<=z;i++){
                         if(t.getTimeTable()[x][i]==1){
                             System.out.println("Course time conflicts");
-                            sig=true;
+                            sig2=true;
                             break;
                         }
                     }
-                    if(sig)continue;
+                    if(sig2)continue;
                     //导入课程成功
                     String newCourseId=CourseId.getCourseId();
                     cc.setCourseId(newCourseId);
+                    cc.setCourseTeacher(t.getName());
                     t.getCourses().put(newCourseId,cc);
                     t.getCourseArray().add(cc);
                     for(int i=y;i<=z;i++){
                         t.getTimeTable()[x][i]=1;//更新时间表
                     }
+                    t.setCourseNum(t.getCourseNum()+1);//更新课程数量
                     CourseId.courseList.add(cc);
                     CourseId.courseStatus.put(newCourseId,cc);
                     System.out.println("Create course success (courseId: "+newCourseId+")");

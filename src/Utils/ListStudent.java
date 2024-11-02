@@ -53,7 +53,7 @@ public class ListStudent {
         }
 
         //成功输出
-        cc.listStudents();
+        cc.listStudents2();
         System.out.println("List student success");
 
         return true;

@@ -20,10 +20,11 @@ public class Quit {
 //        }
         Status.currentUserId=null;
         for (String s : UserList.loginIdList) {
-            if(UserList.isUserLogin(s)){
+            //if(UserList.isUserLogin(s)){
                 System.out.println(s+" Bye~");
-            }
+            //}
         }
+
         UserList.loginIdList.clear();
         deleteDataDirectory();
         System.out.println("----- Good Bye! -----");
@@ -32,7 +33,7 @@ public class Quit {
 
 
     public static void deleteDataDirectory() {
-        String path = "src/data";
+        String path = "./data";
         File directory = new File(path);
         deleteDirectory(directory);
     }

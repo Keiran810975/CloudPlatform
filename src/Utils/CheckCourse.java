@@ -25,7 +25,7 @@ public class CheckCourse {
         if(Scan.isParamNum(arr,1)){
             //如果是学生或管理员
             if(JudgeType.isAdministrator(userId)||JudgeType.isStudent(userId)){
-                if(CourseId.courseList.isEmpty()){
+                if(CourseId.courseStatus.isEmpty()){
                     System.out.println("Course does not exist");
                     return false;
                 }
@@ -38,7 +38,7 @@ public class CheckCourse {
             else if(JudgeType.isTeacher(userId)){
                 User user = UserList.userList.get(Status.currentUserId);
                 Teacher teacher = (Teacher) user;
-                if(teacher.getCourseArray().isEmpty()){
+                if(teacher.getCourses().isEmpty()){
                     System.out.println("Course does not exist");
                     return false;
                 }
@@ -74,7 +74,7 @@ public class CheckCourse {
             User user = UserList.userList.get(checkId);
             Teacher teacher = (Teacher) user;
             //工号对应的老师名下无课程
-            if(teacher.getCourseArray().isEmpty()){
+            if(teacher.getCourses().isEmpty()){
                 System.out.println("Course does not exist");
                 return false;
             }

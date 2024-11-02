@@ -64,7 +64,7 @@ public class cancelCourse {
                 for(int i=y;i<=z;i++){
                     stu.getTimeTable()[x][i]=0;
                 }
-                cc.getCourseStudents().remove(stu.getId());//在这个课里移除这个学生
+                cc.getCourseStudents().remove(Status.currentUserId);//在这个课里移除这个学生
                 stu.getCourses().remove(courseId);
                 System.out.println("Cancel course success (courseId: "+courseId+")");
             }else{

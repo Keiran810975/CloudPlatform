@@ -17,16 +17,34 @@ public class Course implements Serializable {
         // 自定义排序规则
         courseStudentsArray.sort(Comparator.comparing((Student s) -> {
             String id = s.getId();
-            if (id.startsWith("BY")) return 1;
-            else if (id.startsWith("SY")) return 2;
-            else if (id.startsWith("ZY")) return 3;
-            else return 4;
+            if (!id.startsWith("ZY") && !id.startsWith("SY") && !id.startsWith("BY")) return 0; // 不以这三种开头的排在最前
+            if (id.startsWith("ZY")) return 1;  // ZY 排在第二
+            if (id.startsWith("SY")) return 2;  // SY 排在第三
+            if (id.startsWith("BY")) return 3;  // BY 排在最后
+            return 4;  // 默认情况
         }).thenComparing(Student::getId)); // 优先级相同的情况下按字典序排序
 
         // 输出排序后的学生ID
         courseStudentsArray.stream()
                 .filter(student -> courseStudents.containsKey(student.getId()))
                 .forEach(student -> System.out.println(student.getId()+": "+student.getName()));
+    }
+    public void listStudents2() {
+        // 将 courseStudents 的 values 转换为 ArrayList
+        List<Student> studentsList = new ArrayList<>(courseStudents.values());
+
+        // 自定义排序规则
+        studentsList.sort(Comparator.comparing((Student s) -> {
+            String id = s.getId();
+            if (!id.startsWith("ZY") && !id.startsWith("SY") && !id.startsWith("BY")) return 0; // 不以这三种开头的排在最前
+            if (id.startsWith("ZY")) return 1;  // ZY 排在第二
+            if (id.startsWith("SY")) return 2;  // SY 排在第三
+            if (id.startsWith("BY")) return 3;  // BY 排在最后
+            return 4;  // 默认情况
+        }).thenComparing(Student::getId)); // 优先级相同的情况下按字典序排序
+
+        // 输出排序后的学生ID
+        studentsList.forEach(student -> System.out.println(student.getId() + ": " + student.getName()));
     }
 
     public List<Student> getCourseStudentsArray() {

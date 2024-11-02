@@ -30,9 +30,9 @@ public class OutputCourseBatch {
 
         // 判断路径前缀并设置目标路径
         if (path.startsWith("./")) {
-            targetPath = "src/data/"+path.substring(2);
+            targetPath = "./data/"+path.substring(2);
         }else{
-            targetPath = "src/data/"+path;
+            targetPath = "./data/"+path;
         }
         Teacher t=(Teacher) UserList.userList.get(Status.currentUserId);
         t.serializeCourses(targetPath);

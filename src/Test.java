@@ -3,8 +3,9 @@ import java.util.Scanner;
 import Global.Commends;
 import Utils.*;
 
-public class Test {
+import java.io.*;
 
+public class Test {
     private boolean loop=true;
     private String key="";
     Scanner scanner = new Scanner(System.in);
